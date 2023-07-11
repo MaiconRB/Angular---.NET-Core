@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-sm-4" *ngIf="fornecedorSelecionado">
+    <div class="row">
+      <div class="mr-auto">
+        <app-titulo [titulo]="'Fornecedor: '+ fornecedorSelecionado.razaoSocial"></app-titulo>
+      </div>
+      <br>
+      <br>
+      <div class="mt-1">
+        <button class="btn btn-sm btn-outline-danger" (click)="voltar()">
+          Voltar
+        </button>
+      </div>
+    </div>
+
+    <br>
+
+   <form [formGroup]="fornecedorForm" (submit)="fornecedorSubimit()">
+    <div class="form-group">
+      <label for="formGroupExampleInput">Razão Social </label>
+      <input type="text" formControlName="razaoSocial" class="form-control" >
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">CNPJ</label>
+      <input type="text" formControlName="cnpj" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">UF</label>
+      <input type="text" formControlName="uf" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput">Email </label>
+      <input type="text" formControlName="email" class="form-control" >
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Contato </label>
+      <input type="text" formControlName="contato" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Nome do Contato</label>
+      <input type="text" formControlName="nomeContato" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <hr>
+      <button class="btn btn-success" [disabled]="!fornecedorForm.valid">Salvar</button>
+    </div>
+   </form>
+
+
+  </div>
+  
+  <div [ngClass]="{'col-sm-6': fornecedorSelecionado, 'col-sm-12': !fornecedorSelecionado}">
+    <app-titulo [titulo]="titulo"></app-titulo>
+    <br>
+    <table class="table table-hover">
+      <thead class="table-light">
+          <tr>
+              <th scope="col">#</th>
+              <th scope="col">Razao Social</th>
+              <th scope="col">CNPJ</th>
+              <th scope="col">UF</th>
+              <th scope="col">Email</th>
+              <th scope="col">Contato</th>
+              <th scope="col">Nome Contato</th>
+              <th scope="col">Opções</th>
+              
+            </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let fornecedor of fornecedores">
+
+              <th scope="row">{{fornecedor.id}}</th>
+              <td>{{fornecedor.razaoSocial}}</td>
+              <td>{{fornecedor.cnpj}}</td>
+              <td>{{fornecedor.uf}}</td>
+              <td>{{fornecedor.email}}</td>
+              <td>{{fornecedor.contato}}</td>
+              <td>{{fornecedor.nomeContato}}</td>
+
+              <td>
+                <div class="btn-group">
+                  <td><button (click)="fornecedorSelect(fornecedor)"
+                    class="text-dark btn btn-sm btn-outline-primary">Editar</button></td>
+                  <button class="btn btn-sm btn-outline-danger"(click)="deletarFornecedor(fornecedor.id)">Excluir</button>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+      <div class="form-group">
+        <br>
+        <button class="btn btn-success" (click)="fornecedorNovo()">Adicionar</button>
+      </div>
+    </table>
+  </div>
+  
+
+</div>
+
